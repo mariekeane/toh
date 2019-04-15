@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class HeroService {
 
-  private heroesUrl = 'api/heroes';  // URL to web api
+  readonly heroesUrl = 'api/heroes';  // URL to web api
 
   constructor(private http: HttpClient,
               private messageService: MessageService) { }
