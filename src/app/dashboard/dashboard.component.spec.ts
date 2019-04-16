@@ -1,23 +1,42 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+import { of } from 'rxjs'
 
 import { DashboardComponent } from './dashboard.component';
 import { HeroSearchComponent } from '../hero-search/hero-search.component';
+import { Hero } from '../hero';
+import { HeroService } from '../hero.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let getHeroesSpy: jasmine.Spy;
+  let expectedHeroes: Hero[];
 
   beforeEach(async(() => {
+    expectedHeroes = [
+        { id: 1, name: 'A' },
+        { id: 2, name: 'B' },
+       ] as Hero[];
+
+    // Create a fake HeroService object with a `getHeroes()` spy
+    const heroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
+    // Make the spy return a synchronous Observable with the test data
+    getHeroesSpy = heroService.getHeroes.and.returnValue( of(expectedHeroes) );
+    
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
       declarations: [
         DashboardComponent,
         HeroSearchComponent
+      ],
+      providers:    [
+        { provide: HeroService, useValue: heroService }
       ]
     })
     .compileComponents();
@@ -32,4 +51,19 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('should get expected heroes', () => {
+    expect(component.heroes).toEqual(expectedHeroes.slice(1, 5), 'should return expected heroes');
+    expect(getHeroesSpy.calls.any()).toBe(true, 'getHeroes called');
+  });
+  
+  /*it('should get expected heroes (async)', async(() => {
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+        // after something in the component changes, you should detect changes
+        fixture.detectChanges();
+        expect(component.heroes).toEqual(expectedHeroes.slice(1, 5), 'should return expected heroes');
+        expect(getHeroesSpy.calls.any).toBe(true, 'getHeroes called');
+    })
+  }));*/
 });

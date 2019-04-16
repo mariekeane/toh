@@ -1,3 +1,5 @@
+// Resources: https://offering.solutions/blog/articles/2017/10/02/testing-angular-2-http-service/
+
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
