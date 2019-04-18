@@ -28,9 +28,8 @@ describe('HeroDetailComponent', () => {
     
     // Create a fake HeroService object with a `getHeroes()` spy
     const heroService = jasmine.createSpyObj('HeroService', ['getHero', 'updateHero']);
-    // Make the spy return a synchronous Observable with the test data
-    getHeroSpy = heroService.getHero.and.returnValue( of(originalHero) );
-    updateHeroSpy = heroService.updateHero.and.returnValue( of(updatedHero) );
+    heroService.getHero.and.returnValue( of(originalHero) );
+    heroService.updateHero.and.returnValue( of(updatedHero) );
     
     TestBed.configureTestingModule({
       imports: [
@@ -51,6 +50,9 @@ describe('HeroDetailComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     
+    getHeroSpy = fixture.debugElement.injector.get(HeroService).getHero as jasmine.Spy;
+    updateHeroSpy = fixture.debugElement.injector.get(HeroService).updateHero as jasmine.Spy;
+    
     title = fixture.nativeElement.querySelector('h2');
     nameInput = fixture.nativeElement.querySelector('input');
   });
@@ -60,6 +62,7 @@ describe('HeroDetailComponent', () => {
   });
   
   it('should display name of hero', () => {
+    expect(getHeroSpy.calls.any()).toBe(true, 'getHero called');
     expect(title.textContent).toBe(originalHero.name.toUpperCase() + ' Details');
   });
   
@@ -69,6 +72,7 @@ describe('HeroDetailComponent', () => {
     expect(fixture.nativeElement.querySelector('#heroDetails')).toBeNull();
   });
   
+  // NOTE: updateHero not called until user clicks "Save" -- not simulated here
   it('should update title when name changes', () => {
     // simulate user entering a new name into the input box
     nameInput.value = updatedHero.name;   
