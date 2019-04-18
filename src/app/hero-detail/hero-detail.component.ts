@@ -12,7 +12,7 @@ import { Hero } from '../hero';
 })
 export class HeroDetailComponent implements OnInit {
 
-  @Input() hero: Hero;
+  hero: Hero;
 
   constructor(private route: ActivatedRoute,
               private heroService: HeroService,

@@ -12,7 +12,7 @@ import { HeroService } from '../hero.service';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let getHeroesSpy: jasmine.Spy;
+  let getHeroesSpy;
   let expectedHeroes: Hero[];
 
   beforeEach(async(() => {
@@ -23,8 +23,7 @@ describe('DashboardComponent', () => {
 
     // Create a fake HeroService object with a `getHeroes()` spy
     const heroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
-    // Make the spy return a synchronous Observable with the test data
-    getHeroesSpy = heroService.getHeroes.and.returnValue( of(expectedHeroes) );
+    heroService.getHeroes.and.returnValue( of(expectedHeroes) );
     
     TestBed.configureTestingModule({
       imports: [
@@ -46,6 +45,7 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    getHeroesSpy = fixture.debugElement.injector.get(HeroService).getHeroes as jasmine.Spy;
   });
 
   it('should create', () => {
