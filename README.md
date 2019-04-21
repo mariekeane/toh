@@ -1,6 +1,10 @@
 # AngularTourOfHeroes
 
+<<<<<<< HEAD
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
+=======
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+>>>>>>> 7789c10173fcc452c2f171dbd0643282b14a4c96
 
 ## Development server
 
