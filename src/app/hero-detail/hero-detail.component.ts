@@ -27,7 +27,15 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
   }
-  
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
+  }
+
+  addSkill(): void {
+    this.hero.skills.push('');
+  }
+
   goBack(): void {
     this.location.back();
   }

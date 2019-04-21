@@ -2,10 +2,19 @@
   <h2>{{hero.name | uppercase}} Details</h2>
   <div><span>id: </span>{{hero.id}}</div>
   <div>
-    <label>name:
-      <input [(ngModel)]="hero.name" placeholder="name"/>
+    <label>
+      name:
+      <input [(ngModel)]="hero.name" placeholder="name" />
     </label>
   </div>
+</div>
+<!-- Code to two-way bind object array values -->
+<h2>Skills</h2>
+<div class="skill" *ngFor="let skill of hero.skills; let idx = index; trackBy:trackByIndex;">
+  <input [(ngModel)]="hero.skills[idx]" [name]="skill" placeholder="skill" required />
+</div>
+<div>
+  <button (click)="addSkill()">add skill</button>
 </div>
 <button (click)="save()">save</button>
 <button (click)="goBack()">go back</button>

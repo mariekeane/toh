@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\heroes"
   ],
-  "SelectedNode": "\\src\\favicon.ico",
+  "SelectedNode": "\\src\\app\\hero.service.spec.ts",
   "PreviewInSolutionExplorer": false
 }
