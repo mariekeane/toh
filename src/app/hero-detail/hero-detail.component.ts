@@ -32,6 +32,17 @@ export class HeroDetailComponent implements OnInit {
     return index;
   }
 
+  removeSkill(position: number): void {
+    this.hero.skills.splice(position, 1);
+  }
+
+  /*
+   delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
+  }
+   */
+
   addSkill(): void {
     this.hero.skills.push('');
   }
