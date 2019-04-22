@@ -1,7 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
+import { Location } from '@angular/common';
 
 import { of } from 'rxjs'
 
@@ -12,9 +15,12 @@ import { HeroService } from '../hero.service';
 describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
   let fixture: ComponentFixture<HeroDetailComponent>;
+  let router: Router;
+  let location;
   
   let getHeroSpy: jasmine.Spy;
   let updateHeroSpy: jasmine.Spy;
+  let backSpy: jasmine.Spy;
   
   let originalHero: Hero;
   let updatedHero: Hero;
@@ -30,16 +36,18 @@ describe('HeroDetailComponent', () => {
     const heroService = jasmine.createSpyObj('HeroService', ['getHero', 'updateHero']);
     heroService.getHero.and.returnValue( of(originalHero) );
     heroService.updateHero.and.returnValue( of(updatedHero) );
+    location = jasmine.createSpyObj("Location", ["back"]);
     
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([]),
         HttpClientTestingModule
       ],
       declarations: [ HeroDetailComponent ],
       providers:    [
-        { provide: HeroService, useValue: heroService }
+        { provide: HeroService, useValue: heroService },
+        { provide: Location, useValue: location }
       ]
     })
     .compileComponents();
@@ -48,10 +56,12 @@ describe('HeroDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeroDetailComponent);
     component = fixture.componentInstance;
+    router = TestBed.get(Router)
     fixture.detectChanges();
     
     getHeroSpy = fixture.debugElement.injector.get(HeroService).getHero as jasmine.Spy;
     updateHeroSpy = fixture.debugElement.injector.get(HeroService).updateHero as jasmine.Spy;
+    backSpy = fixture.debugElement.injector.get(Location).back as jasmine.Spy;
     
     title = fixture.nativeElement.querySelector('h2');
     nameInput = fixture.nativeElement.querySelector('input');
@@ -82,5 +92,30 @@ describe('HeroDetailComponent', () => {
     fixture.detectChanges();
    
     expect(title.textContent).toBe(updatedHero.name.toUpperCase() + ' Details');
+  });
+  
+  it('should update hero on save', () => {
+    nameInput.value = updatedHero.name;   
+    nameInput.dispatchEvent(new Event('input'));   
+    fixture.detectChanges();
+    
+    const saveButton = fixture.debugElement.query(By.css('#saveHero')).nativeElement;
+    saveButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    
+    expect(component.hero).toEqual(updatedHero);
+    expect(updateHeroSpy.calls.any()).toBe(true, 'updateHero called');
+  });
+  
+  it('should go back on save', () => {
+    nameInput.value = updatedHero.name;   
+    nameInput.dispatchEvent(new Event('input'));   
+    fixture.detectChanges();
+    
+    const saveButton = fixture.debugElement.query(By.css('#saveHero')).nativeElement;
+    saveButton.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    
+    expect(backSpy).toHaveBeenCalledTimes(1);
   });
 });

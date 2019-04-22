@@ -2,9 +2,9 @@ import { Component, DebugElement }   from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { By } from '@angular/platform-browser';
 
 import { of } from 'rxjs'
-import { By } from '@angular/platform-browser';
 
 import { HeroesComponent } from './heroes.component';
 import { Hero } from '../hero';
