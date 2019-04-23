@@ -1,5 +1,5 @@
 import { Component, DebugElement }   from '@angular/core';
-import { async, ComponentFixture, fakeAsync, tick, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, tick, discardPeriodicTasks, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
@@ -120,6 +120,7 @@ describe('HeroSearchComponent', () => {
     expect(searchResultElements.length).toEqual(expectedResults.length);
     
     /* Act */
+    //discardPeriodicTasks();
     tick(DEBOUNCING_VALUE);
     fixture.detectChanges();
     
