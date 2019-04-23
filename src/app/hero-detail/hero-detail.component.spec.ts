@@ -16,7 +16,6 @@ describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
   let fixture: ComponentFixture<HeroDetailComponent>;
   let router: Router;
-  let location;
   
   let getHeroSpy: jasmine.Spy;
   let updateHeroSpy: jasmine.Spy;
@@ -32,11 +31,13 @@ describe('HeroDetailComponent', () => {
     originalHero = { id: 1, name: 'MyHero' } as Hero;
     updatedHero = { id: 1, name: 'MyHeroUpdated' } as Hero;
     
-    // Create a fake HeroService object with a `getHeroes()` spy
+    // Create a fake HeroService object with `getHero()` and `updatehero()` spies
     const heroService = jasmine.createSpyObj('HeroService', ['getHero', 'updateHero']);
     heroService.getHero.and.returnValue( of(originalHero) );
     heroService.updateHero.and.returnValue( of(updatedHero) );
-    location = jasmine.createSpyObj("Location", ["back"]);
+    
+    // Create a fake Location object with a `back()` spy
+    const location = jasmine.createSpyObj("Location", ["back"]);
     
     TestBed.configureTestingModule({
       imports: [
