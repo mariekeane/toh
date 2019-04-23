@@ -12,7 +12,20 @@
 <h2>Skills</h2>
 <div class="skill" *ngFor="let skill of hero.skills; let idx = index; trackBy:trackByIndex;">
   <input [(ngModel)]="hero.skills[idx]" [name]="skill" placeholder="skill" required />
+  <button class="delete" title="delete skill" (click)="removeSkill(idx)">
+    x
+  </button>
 </div>
+
+<!--
+    <button class="delete" title="delete hero"
+            (click)="delete(hero)">
+      x
+    </button>
+
+-->
+
+
 <div>
   <button (click)="addSkill()">add skill</button>
 </div>
