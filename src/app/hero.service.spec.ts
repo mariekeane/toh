@@ -63,6 +63,8 @@ describe('HeroesService (with mocks)', () => {
       );
 
       const req = httpTestingController.expectOne(heroService.heroesUrl);
+      expect(req.request.method).toEqual('GET');
+      
       req.flush([]); // Respond with no heroes
     });
     
@@ -74,6 +76,7 @@ describe('HeroesService (with mocks)', () => {
       );
 
       const req = httpTestingController.expectOne(heroService.heroesUrl);
+      expect(req.request.method).toEqual('GET');
 
       // respond with a 404 and the error message in the body
       req.flush(msg, {status: 404, statusText: 'Not Found'});

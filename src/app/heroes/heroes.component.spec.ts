@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { of } from 'rxjs'
 
@@ -11,8 +12,10 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
 describe('HeroesComponent', () => {
+  
   let component: HeroesComponent;
   let fixture: ComponentFixture<HeroesComponent>;
+  let router: Router;
   
   let expectedHeroes: Hero[];
   let heroToAdd: Hero;
@@ -42,12 +45,13 @@ describe('HeroesComponent', () => {
     
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([]),
         HttpClientModule
       ],
       declarations: [ HeroesComponent ],
       providers:    [
-        { provide: HeroService, useValue: heroService }
+        { provide: HeroService, useValue: heroService },
+        //{ provide: Router,      useValue: routerSpy }
       ]
     })
     .compileComponents();
@@ -56,6 +60,7 @@ describe('HeroesComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeroesComponent);
     component = fixture.componentInstance;
+    router = fixture.debugElement.injector.get(Router);
     fixture.detectChanges();
     
     getHeroesSpy = fixture.debugElement.injector.get(HeroService).getHeroes as jasmine.Spy;
@@ -132,6 +137,19 @@ describe('HeroesComponent', () => {
     // Check template display
     const heroListItems: DebugElement[] = fixture.debugElement.queryAll(By.css('.hero'));
     expect(heroListItems.length).toEqual(newHeroes.length);
+  });
+
+  it('should assign appropriate routerLinks to each hero element', () => {
+    const heroListItemElement: HTMLElement = fixture.debugElement.queryAll(By.css('.hero'))[2].nativeElement;
+    const heroLink = heroListItemElement.firstElementChild;
+    const href = heroLink.getAttribute('href');
+    //spyOn(router, 'navigateByUrl');
+    
+    //heroLink.dispatchEvent(new Event('click'));
+    //fixture.detectChanges();
+  
+    expect(href).toEqual('/detail/' + expectedHeroes[2].id);
+    //expect(router.navigateByUrl).toHaveBeenCalledWith(['/detail/' + expectedHeroes[2].id]);
   });
   
 });
