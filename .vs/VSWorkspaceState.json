@@ -3,8 +3,10 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\hero-detail",
+    "\\src\\app\\hero-search",
     "\\src\\app\\heroes"
   ],
-  "SelectedNode": "\\src\\app\\hero.service.spec.ts",
+  "SelectedNode": "\\src\\app\\hero-search\\hero-search.component.ts",
   "PreviewInSolutionExplorer": false
 }

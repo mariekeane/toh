@@ -1,10 +1,18 @@
 <div id="search-component">
   <h4>Hero Search</h4>
-
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-
+  <input #nameSearchBox id="search-box" (input)="nameSearch(nameSearchBox.value)" placeholder="Hero Name" />
   <ul class="search-result">
-    <li *ngFor="let hero of heroes$ | async" >
+    <li *ngFor="let hero of heroes$ | async">
+      <a routerLink="/detail/{{hero.id}}">
+        {{hero.name}}
+      </a>
+    </li>
+  </ul>
+
+  <h4>Skill Search</h4>
+  <input #skillSearchBox id="skill-search-box" (input)="skillSearch(skillSearchBox.value)" placeholder="Skill" />
+  <ul class="search-result">
+    <li *ngFor="let hero of skills$ | async">
       <a routerLink="/detail/{{hero.id}}">
         {{hero.name}}
       </a>
