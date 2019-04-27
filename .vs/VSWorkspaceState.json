@@ -2,11 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\hero-detail",
-    "\\src\\app\\hero-search",
-    "\\src\\app\\heroes"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\hero-search\\hero-search.component.ts",
+  "SelectedNode": "\\src\\app\\hero.service.ts",
   "PreviewInSolutionExplorer": false
 }
