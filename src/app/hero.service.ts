@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-
 import { Hero } from './hero';
 
 const httpOptions = {
@@ -104,10 +103,13 @@ export class HeroService {
 
   /* GET Skills */
   searchSkills(term: string): Observable<Hero[]> {
+
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
+
+
     return this.http.get<Hero[]>(`${this.heroesUrl}/?skills=${term}`).pipe(
       tap(_ => this.log(`found skills matching "${term}"`)),
       catchError(this.handleError<Hero[]>('searchSkills', []))

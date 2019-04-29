@@ -1,4 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Appointment } from './appointment';
 import { Hero } from './hero';
 import { Injectable } from '@angular/core';
 
@@ -8,7 +9,15 @@ import { Injectable } from '@angular/core';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const heroes = [
-      { id: 1, name: 'Blue Raja', skills: ['throwing silverware','british accent'] },
+      { id: 1, name: 'Blue Raja', skills: ['throwing silverware', 'british accent'], appointments: [
+          { location: 'Champion City USA', date: "2/1/2002, 2:00:00 PM" },
+          { location: 'Champion City USA', date: "2/3/2002, 2:00:00 PM" },
+          { location: 'Champion City USA', date: "4/3/2004, 2:00:00 PM" },
+          { location: 'Champion City USA', date: "4/5/2004, 2:00:00 PM" },
+          { location: 'Champion City USA', date: "6/5/2006, 2:00:00 PM" },
+          { location: 'Champion City USA', date: "6/7/2006, 2:00:00 PM" }
+        ]
+      },
       { id: 2, name: 'Bowler', skills: ['haunted bowling ball'] },
       { id: 3, name: 'Shoveler', skills: ['advanced shoveling','armored'] },
       { id: 4, name: 'Mr. Furious', skills: ['rage','mechanical skills'] },
@@ -22,12 +31,12 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 12, name: 'Flashbang', skills: ['stun ability'] },
       { id: 13, name: 'Freefall', skills: ['flight','gravity manipulation'] },
       { id: 14, name: 'Hellbelle', skills: ['sound control'] },
-      { id: 15, name: 'Wraith', skills: ['phasing','invisibility'] },
-      { id: 16, name: 'Ace', skills: ['precognition','postcognition','probability manipulation'] },
-      { id: 17, name: 'Warlock', skills: ['telekinesis','telesensory'] },
-      { id: 18, name: 'Grendel', skills: ['shapeshifting','regeneration','water breathing'] },
-      { id: 19, name: 'Rook', skills: ['earth control','armored'] },
-      { id: 20, name: 'Tinman', skills: ['martial arts','multilingual','mechanic'] }
+      { id: 15, name: 'Wraith', skills: ['phasing', 'invisibility'], appointments: [{ location: 'Los Angeles CA', date: "1/1/2001, 1:00:00 AM" }] },
+      { id: 16, name: 'Ace', skills: ['precognition', 'postcognition', 'probability manipulation'], appointments: [{ location: 'Beverly Hills CA', date: "2/2/2002, 2:00:00 AM" }] },
+      { id: 17, name: 'Warlock', skills: ['telekinesis', 'telesensory'], appointments: [{ location: 'Kiev Ukraine', date: "3/3/2003, 3:00:00 AM" }] },
+      { id: 18, name: 'Grendel', skills: ['shapeshifting', 'regeneration', 'water breathing'], appointments: [{ location: 'Coalville WA', date: "4/4/2004, 4:00:00 AM" }] },
+      { id: 19, name: 'Rook', skills: ['earth control', 'armored'], appointments: [{ location: 'Salt Lake City UT', date: "5/5/2005, 5:00:00 AM" }] },
+      { id: 20, name: 'Tinman', skills: ['martial arts', 'multilingual', 'mechanic'], appointments: [{ location: 'Aleppo Syria', date: "6/6/2006, 6:00:00 AM" }] }
     ];
     return { heroes };
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { Appointment } from '../appointment';
 import { HeroService }  from '../hero.service';
 import { Hero } from '../hero';
 
@@ -36,16 +36,17 @@ export class HeroDetailComponent implements OnInit {
     this.hero.skills.splice(position, 1);
   }
 
-  /*
-   delete(hero: Hero): void {
-    this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
-  }
-   */
-
   addSkill(): void {
     this.hero.skills.push('');
   }
+
+  removeAppointment(position: number): void {
+    this.hero.appointments.splice(position, 1);
+  }
+
+  addAppointment(): void {
+    this.hero.appointments.push(new Appointment(new Date,''));
+ }
 
   goBack(): void {
     this.location.back();
