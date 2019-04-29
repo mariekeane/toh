@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { Appointment } from '../appointment';
 import { __await } from 'tslib';
 
 @Component({
@@ -30,28 +29,25 @@ export class AppointmentpageComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
-
-    // cheap delay tactic until I learn how to promise a call
-
-
-    if (this.heroes.length == 0) {
-      this.UpdateAllAppointments();
-      console.log('heroes length at zero');
-    } else {
-      this.UpdateAllAppointments();
-      console.log('heroes length not at zero');
-    }
+      .subscribe(heroes => {
+        this.heroes = heroes;
+        this.UpdateAllAppointments();
+      });
+    
+    // this.waitOnHeroes();
   }
 
   UpdateAllAppointments(): void {
+    console.log('updateallappointments is being called');
     // for every hero in heroes ...
     this.heroes.forEach(a => {
       // for every appointment in appointments ...
-      a.appointments.forEach(b => {
-        // push to allappointments an identical hero with just (b) appointment
-        this.allappointments.push(new Hero(a.id, a.name, a.skills, [b]));
-      });
+      if (a.appointments) {
+        a.appointments.forEach(b => {
+          // push to allappointments an identical hero with just (b) appointment
+          this.allappointments.push(new Hero(a.id, a.name, a.skills, [b]));
+        });
+      }
     });
     // sort allappointments based on date
     // this.allappointments.sort
