@@ -11,15 +11,7 @@ import { __await } from 'tslib';
 
 export class AppointmentpageComponent implements OnInit {
   heroes: Hero[] = [];
-  allappointments: Hero[] = [{
-    id: 127,
-    name: 'The Dude',
-    skills: [],
-    appointments: [{
-      date: new Date('11/10/2016,11:49:36AM'),
-      location: 'Mayfield Heights'
-    }]
-    }];
+  allappointments: Hero[] = [];
 
   constructor(private heroService: HeroService) { };
 
@@ -33,12 +25,9 @@ export class AppointmentpageComponent implements OnInit {
         this.heroes = heroes;
         this.UpdateAllAppointments();
       });
-    
-    // this.waitOnHeroes();
   }
 
   UpdateAllAppointments(): void {
-    console.log('updateallappointments is being called');
     // for every hero in heroes ...
     this.heroes.forEach(a => {
       // for every appointment in appointments ...
@@ -49,11 +38,14 @@ export class AppointmentpageComponent implements OnInit {
         });
       }
     });
-    // sort allappointments based on date
-    // this.allappointments.sort
+    // sort by date
+    this.allappointments = this.allappointments.sort(
+      (a: Hero, b: Hero) => {
+      if (a.appointments[0].date < b.appointments[0].date) { return -1; }
+      if (a.appointments[0].date > b.appointments[0].date) { return 1; }
+      return 0;
+    });
 
-
-    
   } // end of UpdateAllAppointments
 } // end of AppointmentpageComponent
 
