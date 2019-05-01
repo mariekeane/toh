@@ -4,13 +4,17 @@ import { browser, logging } from 'protractor';
 describe('workspace-project App', () => {
   let page: AppPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new AppPage();
+    await page.navigateTo();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to angular-tour-of-heroes!');
+  it('should display welcome message', async () => {
+    expect(await page.getTitleText()).toEqual('Tour of Heroes');
+  });
+  
+  it('has dashboard as the active view', async () => {
+    expect(await page.getPageElts().appDashboard.isPresent()).toBeTruthy();
   });
 
   afterEach(async () => {
