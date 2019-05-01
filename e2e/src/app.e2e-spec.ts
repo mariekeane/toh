@@ -14,7 +14,7 @@ describe('workspace-project App', () => {
   });
   
   it('has dashboard as the active view', async () => {
-    expect(await page.getPageElts().appDashboard.isPresent()).toBeTruthy();
+    expect(await page.getAppDashboard().isPresent()).toBeTruthy();
   });
 
   afterEach(async () => {

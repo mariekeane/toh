@@ -28,6 +28,7 @@ export class HeroesPage {
     let heroListItems: ElementArrayFinder = this.getHeroes();
     let idText = await this.getHeroIdText(index);
     let anchorText = await heroListItems.get(index).element(by.css('a')).getText();
+    // E.g. extract "Mr. Nice" from "11 Mr. Nice"
     return anchorText.substr(idText.length + 1);
   } 
 }

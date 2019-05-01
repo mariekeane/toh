@@ -34,7 +34,8 @@ describe('Hero Details Page', () => {
     
     it('should navigate to heroes page on save', async () => {
       await heroDetailsPage.clickSaveButton();
-      await browser.wait(ExpectedConditions.urlIs(browser.baseUrl + "/heroes"), 5000);
+      //await browser.wait(ExpectedConditions.urlIs(browser.baseUrl + "/heroes"), 5000);
+      expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + "/heroes");
     });
     
     it('heroes page should contain updated hero', async () => {
@@ -43,6 +44,20 @@ describe('Hero Details Page', () => {
       
       expect(parseInt(await heroPage.getHeroIdText(0))).toEqual(11);
       expect(await heroPage.getHeroNameText(0)).toEqual('Cool Dude');
+    });
+    
+    it('should navigate to heroes page on cancel', async () => {
+      await heroDetailsPage.clickCancelButton();
+      //await browser.wait(ExpectedConditions.urlIs(browser.baseUrl + "/heroes"), 5000);
+      expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + "/heroes");
+    });
+    
+    it('heroes page should NOT contain updated hero', async () => {
+      await heroDetailsPage.clickCancelButton();
+      await browser.wait(ExpectedConditions.urlContains("/heroes"), 5000);
+      
+      expect(parseInt(await heroPage.getHeroIdText(0))).toEqual(11);
+      expect(await heroPage.getHeroNameText(0)).toEqual('Mr. Nice');
     });
   
   });
