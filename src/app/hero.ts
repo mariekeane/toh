@@ -7,7 +7,7 @@ export class Hero {
   appointments: Appointment[] = [];
 
 
-  constructor(num: number, nick: string, skillist: string[], datelist: Appointment[]) {
+  constructor(num: number, nick: string, skillist: string[] = [], datelist: Appointment[] = []) {
     this.id = num;
     this.name = nick;
     this.skills = skillist;

@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\messages"
   ],
-  "SelectedNode": "\\src\\app\\filterpipe.service.ts",
+  "SelectedNode": "\\src\\app\\hero.service.spec.ts",
   "PreviewInSolutionExplorer": false
 }
