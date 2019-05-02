@@ -94,7 +94,7 @@ describe('HeroSearchComponent', () => {
     /* Assert */
     expect(searchHeroesSpy.calls.any()).toEqual(true);
     expect(results).toEqual(expectedResults);
-    searchResultElements = fixture.debugElement.queryAll(By.css('.search-result'));
+    searchResultElements = fixture.debugElement.queryAll(By.css('.hero-search-result'));
     expect(searchResultElements.length).toEqual(3);
   }));
 
@@ -118,7 +118,7 @@ describe('HeroSearchComponent', () => {
 
     /* Assert */
     expect(results).toEqual(expectedResults);
-    searchResultElements = fixture.debugElement.queryAll(By.css('.search-result'));
+    searchResultElements = fixture.debugElement.queryAll(By.css('.hero-search-result'));
     expect(searchResultElements.length).toEqual(expectedResults.length);
 
     /* Act */
@@ -128,7 +128,7 @@ describe('HeroSearchComponent', () => {
 
     /* Assert */
     expect(results).toEqual([{ id: 5, name: 'Aaaaa' }] as Hero[]);
-    searchResultElements = fixture.debugElement.queryAll(By.css('.search-result'));
+    searchResultElements = fixture.debugElement.queryAll(By.css('.hero-search-result'));
     expect(searchResultElements.length).toEqual(1);
   }));
 });
