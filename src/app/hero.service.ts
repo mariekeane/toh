@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Hero } from './hero';
 
@@ -23,7 +23,7 @@ export class HeroService {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
         tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<Hero[]>('getHeroes', []))
+        catchError(this.handleError<Hero[]>('getHeroes'))
       );
   }
   
@@ -48,18 +48,20 @@ export class HeroService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-   
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse): Observable<T> => {
+
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-   
+
+      const message = (error.error instanceof ErrorEvent) ?
+        error.error.message :
+        `server returned code ${error.status} with body "${error.error}"`;
+
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-   
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+      throw new Error(`${operation} failed: ${message}`);
     };
+
   }
   
   /** PUT: update the hero on the server */
@@ -97,7 +99,7 @@ export class HeroService {
     }
     return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
       tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<Hero[]>('searchHeroes', []))
+      catchError(this.handleError<Hero[]>('searchHeroes'))
     );
   }
 
@@ -112,7 +114,7 @@ export class HeroService {
 
     return this.http.get<Hero[]>(`${this.heroesUrl}/?skills=${term}`).pipe(
       tap(_ => this.log(`found skills matching "${term}"`)),
-      catchError(this.handleError<Hero[]>('searchSkills', []))
+      catchError(this.handleError<Hero[]>('searchSkills'))
     );
   }
 

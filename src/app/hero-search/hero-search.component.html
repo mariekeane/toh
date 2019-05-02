@@ -2,11 +2,11 @@
   <h4>Hero Search</h4>
   <input #nameSearchBox id="search-box" (input)="nameSearch(nameSearchBox.value)" placeholder="Hero Name" />
   <ul class="search-result">
-    <li *ngFor="let hero of heroes$ | async">
+    <li class="search-results" *ngFor=let hero of heroes$ | async">
       <a routerLink="/detail/{{hero.id}}">
         {{hero.name}}
       </a>
-    </li>
+    <!--</li>-->
   </ul>
 
   <h4>Skill Search</h4>
@@ -16,6 +16,6 @@
       <a routerLink="/detail/{{hero.id}}">
         {{hero.name}}
       </a>
-    </li>
-  </ul>
+    <!--</li>-->
+</ul>
 </div>
