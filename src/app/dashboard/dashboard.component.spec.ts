@@ -59,13 +59,3 @@ describe('DashboardComponent', () => {
 });
 
 
-  // 
-  /*it('should get expected heroes (async)', async(() => {
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-        // after something in the component changes, you should detect changes
-        fixture.detectChanges();
-        expect(component.heroes).toEqual(expectedHeroes.slice(1, 5), 'should return expected heroes');
-        expect(getHeroesSpy.calls.any).toBe(true, 'getHeroes called');
-    })
-  }));*/

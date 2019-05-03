@@ -2,6 +2,10 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MessagesComponent } from './messages/messages.component';
+import { Hero } from './hero';
+import { Appointment } from './appointment';
+
+
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -34,4 +38,18 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Tour of Heroes');
   });
+
+  it('should create hero class objects', () => {
+    expect(new Hero(127, 'Goofy', ['silliness']) 
+    ==
+    {name: 'Goofy', id: 127, skills: ['silliness'], appointments: []})
+  });
+
+  it('should create appointment class objects', () => {
+    expect(new Appointment(new Date(6 / 21 / 1788), 'Mexico')
+      ==
+      {date: new Date(6/21/1788), location: 'Mexico'}
+     )
+  });
+
 });
