@@ -15,6 +15,7 @@ describe('DashboardComponent', () => {
   let expectedHeroes: Hero[];
 
   beforeEach(async(() => {
+
     expectedHeroes = [
       { id: 1, name: 'A', skills: [], appointments: [] },
       { id: 2, name: 'B', skills: [], appointments: [] }
@@ -48,14 +49,20 @@ describe('DashboardComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    fixture.whenStable().then(() => { 
+      expect(component).toBeTruthy();
+    })
+  });
+  
+  it('should get expected heroes', () => {
+    fixture.whenStable().then(() => { 
+      expect(component.heroes).toEqual(expectedHeroes.slice(1, 5), 'should return expected heroes');
+      expect(getHeroesSpy.calls.any()).toBe(true, 'getHeroes called');
+    })
   });
 
-  it('should get expected heroes', () => {
-    expect(component.heroes).toEqual(expectedHeroes.slice(1, 5), 'should return expected heroes');
-    expect(getHeroesSpy.calls.any()).toBe(true, 'getHeroes called');
-  });
 
 });
+
 
 

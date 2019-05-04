@@ -3,8 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\messages"
+    "\\src\\app\\appointmentpage",
+    "\\src\\app\\dashboard",
+    "\\src\\app\\hero-detail",
+    "\\src\\app\\hero-search",
+    "\\src\\app\\heroes"
   ],
-  "SelectedNode": "\\src\\app\\hero.service.spec.ts",
+  "SelectedNode": "\\src\\app\\dashboard\\dashboard.component.spec.ts",
   "PreviewInSolutionExplorer": false
 }
