@@ -22,7 +22,7 @@ export function getAllHeroes(req, res) {
     let hero = new Hero(req.body);
     hero.save()
         .then(hero => {
-            res.status(200).json({'hero': 'Added successfully'});
+            res.status(200).json(hero);
         })
         .catch(err => {
             res.status(400).send('Failed to create new record');
@@ -39,7 +39,7 @@ export function getAllHeroes(req, res) {
             hero.appointments = req.body.appointments;
 
             hero.save().then(hero => {
-                res.json('Update done');
+                res.json(hero);
             }).catch(err => {
                 res.status(400).send('Update failed');
             });

@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import * as mongoConfig from './config/config';
+//import * as mongoConfig from './config/config';
+import config from './config/index';
 import routes from './routes/index';
 
 
@@ -18,7 +19,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 // Mongo Connection
-mongoose.connect(mongoConfig.mongoURL, {useNewUrlParser: true});
+mongoose.connect(config.db);
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('MongoDB database connection established successfully!');
@@ -34,4 +35,6 @@ app.use(cors());
 app.use('/', routes);
 
 // Listen on provided port, on all network interfaces.
-app.listen(4000, () => console.log(`Express server running on port 4000`));
+app.listen(config.port, () => console.log(`Express server running on ${config.port}`));
+
+module.exports = app;
