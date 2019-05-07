@@ -78,7 +78,7 @@ describe('AppointmentpageComponent', () => {
   });
 
   // getheroes function should return crash test heroes  
-  it('should verify getheroes was performed', () => {
+  it('should verify getheroes was performed', async () => {
     fixture.whenStable().then(() => {
       expect(component.getHeroes).toEqual(crashTestHeroes);
       expect(getHeroesSpy.calls.any()).toBe(true);
