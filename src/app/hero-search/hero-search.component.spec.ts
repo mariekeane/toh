@@ -18,11 +18,11 @@ describe('HeroSearchComponent', () => {
   
   const DEBOUNCING_VALUE = 300;
   const expectedHeroes: Hero[] = [
-        { id: 1, name: 'A' },
-        { id: 2, name: 'Aa' },
-        { id: 3, name: 'Aaa' },
-        { id: 4, name: 'Aaaa' },
-        { id: 5, name: 'Aaaaa' },
+        { _id: 'abc123', name: 'A' },
+        { _id: 'def456', name: 'Aa' },
+        { _id: 'ghi789', name: 'Aaa' },
+        { _id: 'jkl123', name: 'Aaaa' },
+        { _id: 'mno456', name: 'Aaaaa' },
        ] as Hero[];
   let results: Hero[];
   
@@ -77,9 +77,9 @@ describe('HeroSearchComponent', () => {
     /* Arrange */
     const searchTerm: string = 'aaa';
     const expectedResults: Hero[] = [
-        { id: 3, name: 'Aaa' },
-        { id: 4, name: 'Aaaa' },
-        { id: 5, name: 'Aaaaa' },
+        { _id: 'ghi789', name: 'Aaa' },
+        { _id: 'jkl123', name: 'Aaaa' },
+        { _id: 'mno456', name: 'Aaaaa' },
        ] as Hero[];
     let searchResultElements: DebugElement[];
     
@@ -100,9 +100,9 @@ describe('HeroSearchComponent', () => {
     /* Arrange */
     const searchTerm: string = 'aaa';
     const expectedResults: Hero[] = [
-        { id: 3, name: 'Aaa' },
-        { id: 4, name: 'Aaaa' },
-        { id: 5, name: 'Aaaaa' },
+      { _id: 'ghi789', name: 'Aaa' },
+      { _id: 'jkl123', name: 'Aaaa' },
+      { _id: 'mno456', name: 'Aaaaa' },
        ] as Hero[];
     let searchResultElements: DebugElement[];
     
@@ -125,7 +125,7 @@ describe('HeroSearchComponent', () => {
     fixture.detectChanges();
     
     /* Assert */
-    expect(results).toEqual([{ id: 5, name: 'Aaaaa' }] as Hero[]);
+    expect(results).toEqual([{ _id: 'mno456', name: 'Aaaaa' }] as Hero[]);
     searchResultElements = fixture.debugElement.queryAll(By.css('.search-result'));
     expect(searchResultElements.length).toEqual(1);
   }));

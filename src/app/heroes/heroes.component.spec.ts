@@ -27,14 +27,14 @@ describe('HeroesComponent', () => {
 
   beforeEach(async(() => {
     expectedHeroes = [
-        { id: 1, name: 'A' },
-        { id: 2, name: 'B' },
-        { id: 3, name: 'C' },
-        { id: 4, name: 'D' },
-        { id: 5, name: 'E' },
+        { _id: 'abc123', name: 'A' },
+        { _id: 'def456', name: 'B' },
+        { _id: 'ghi789', name: 'C' },
+        { _id: 'jkl123', name: 'D' },
+        { _id: 'mno456', name: 'E' },
        ] as Hero[];
     
-    heroToAdd = { id: 6, name: 'F' } as Hero;
+    heroToAdd = { _id: 'pqr789', name: 'F' } as Hero;
     heroToDelete = expectedHeroes[2];
 
     // Create a fake HeroService object with a `getHeroes()` spy
@@ -148,7 +148,7 @@ describe('HeroesComponent', () => {
     //heroLink.dispatchEvent(new Event('click'));
     //fixture.detectChanges();
   
-    expect(href).toEqual('/detail/' + expectedHeroes[2].id);
+    expect(href).toEqual('/detail/' + expectedHeroes[2]._id);
     //expect(router.navigateByUrl).toHaveBeenCalledWith(['/detail/' + expectedHeroes[2].id]);
   });
   

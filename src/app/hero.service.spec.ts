@@ -37,8 +37,8 @@ describe('HeroesService (with mocks)', () => {
     beforeEach(() => {
       heroService = TestBed.get(HeroService);
       expectedHeroes = [
-        { id: 1, name: 'A' },
-        { id: 2, name: 'B' },
+        { _id: 'abc123', name: 'A' },
+        { _id: 'def456', name: 'B' },
        ] as Hero[];
     });
 
@@ -103,21 +103,21 @@ describe('HeroesService (with mocks)', () => {
   /* GET api/heroes/id */
   describe('#getHero', () => {
     let expectedHero: Hero;
-    const makeUrl = (id: number) => `${heroService.heroesUrl}/${id}`;
+    const makeUrl = (id: string) => `${heroService.heroesUrl}/${id}`;
 
     beforeEach(() => {
       heroService = TestBed.get(HeroService);
-      expectedHero = { id: 1, name: 'A' } as Hero;
+      expectedHero = { _id: 'abc123', name: 'A' } as Hero;
     });
 
     it('should return expected hero (called once)', () => {
-      heroService.getHero(1).subscribe(
+      heroService.getHero('abc123').subscribe(
         hero => expect(hero).toEqual(expectedHero, 'should return expected hero'),
         fail
       );
 
       // HeroService should have made one request to GET heroes from expected URL
-      const req = httpTestingController.expectOne(makeUrl(1));
+      const req = httpTestingController.expectOne(makeUrl('abc123'));
       expect(req.request.method).toEqual('GET');
 
       // Respond with the mock heroes
@@ -134,10 +134,10 @@ describe('HeroesService (with mocks)', () => {
       heroService = TestBed.get(HeroService);
       
       expectedHeroes = [
-        { id: 1, name: 'Aaa' },
-        { id: 2, name: 'Aaab' },
-        { id: 3, name: 'Baaab' },
-        { id: 4, name: 'Baaa' },
+        { _id: 'abc123', name: 'Aaa' },
+        { _id: 'def456', name: 'Aaab' },
+        { _id: 'ghi789', name: 'Baaab' },
+        { _id: 'jkl123', name: 'Baaa' },
        ] as Hero[];
     });
 
@@ -166,11 +166,11 @@ describe('HeroesService (with mocks)', () => {
   /* PUT api/heroes/id */
   describe('#updateHero', () => {
     // Expecting the query form of URL so should not 404 when id not found
-    const makeUrl = (id: number) => `${heroService.heroesUrl}/${id}`;
+    const makeUrl = (id: string) => `${heroService.heroesUrl}/${id}`;
 
     it('should update a hero and return it', () => {
 
-      const updateHero: Hero = { id: 1, name: 'A' };
+      const updateHero: Hero = { _id: 'abc123', name: 'A' };
 
       heroService.updateHero(updateHero).subscribe(
         data => expect(data).toEqual(updateHero, 'should return the hero'),
@@ -178,7 +178,7 @@ describe('HeroesService (with mocks)', () => {
       );
 
       // HeroService should have made one request to PUT hero
-      const req = httpTestingController.expectOne(heroService.heroesUrl);
+      const req = httpTestingController.expectOne(makeUrl('abc123'));
       expect(req.request.method).toEqual('PUT');
       expect(req.request.body).toEqual(updateHero);
 
@@ -189,29 +189,31 @@ describe('HeroesService (with mocks)', () => {
     });
     
     it('should turn 404 error into user-facing error', () => {
+      const makeUrl = (id: string) => `${heroService.heroesUrl}/${id}`;
       const msg = 'Deliberate 404';
-      const updateHero: Hero = { id: 1, name: 'A' };
+      const updateHero: Hero = { _id: 'abc123', name: 'A' };
       heroService.updateHero(updateHero).subscribe(
         heroes => fail('expected to fail'),
         error => expect(error.message).toContain(msg)
       );
 
-      const req = httpTestingController.expectOne(heroService.heroesUrl);
+      const req = httpTestingController.expectOne(makeUrl('abc123'));
 
       // respond with a 404 and the error message in the body
       req.flush(msg, {status: 404, statusText: 'Not Found'});
     });
     
     it('should turn network error into user-facing error', () => {
+      const makeUrl = (id: string) => `${heroService.heroesUrl}/${id}`;
       const emsg = 'simulated network error';
 
-      const updateHero: Hero = { id: 1, name: 'A' };
+      const updateHero: Hero = { _id: 'abc123', name: 'A' };
       heroService.updateHero(updateHero).subscribe(
         heroes => fail('expected to fail'),
         error => expect(error.message).toContain(emsg)
       );
 
-      const req = httpTestingController.expectOne(heroService.heroesUrl);
+      const req = httpTestingController.expectOne(makeUrl('abc123'));
 
       // Create mock ErrorEvent, raised when something goes wrong at the network level.
       // Connection timeout, DNS error, offline, etc
@@ -232,11 +234,11 @@ describe('HeroesService (with mocks)', () => {
   /* DELETE api/heroes/id */
   describe('#deleteHero', () => {
     // Expecting the query form of URL so should not 404 when id not found
-    const makeUrl = (id: number) => `${heroService.heroesUrl}/${id}`;
+    const makeUrl = (id: string) => `${heroService.heroesUrl}/${id}`;
 
     it('should delete a hero', () => {
 
-      const deleteHero: Hero = { id: 1, name: 'A' };
+      const deleteHero: Hero = { _id: 'abc123', name: 'A' };
 
       heroService.deleteHero(deleteHero).subscribe(
         data => expect(data).toEqual(deleteHero, 'should return the deleted hero'),
@@ -244,7 +246,7 @@ describe('HeroesService (with mocks)', () => {
       );
 
       // HeroService should have made one request to DELETE hero
-      const req = httpTestingController.expectOne(makeUrl(1));
+      const req = httpTestingController.expectOne(makeUrl('abc123'));
       expect(req.request.method).toEqual('DELETE');
       //expect(req.request.body).toEqual(deleteHero);
 
@@ -261,7 +263,7 @@ describe('HeroesService (with mocks)', () => {
 
     it('should add a hero', () => {
 
-      const addHero: Hero = { id: 1, name: 'A' };
+      const addHero: Hero = { _id: 'abc123', name: 'A' };
 
       heroService.addHero(addHero).subscribe(
         data => expect(data).toEqual(addHero, 'should return the added hero'),
