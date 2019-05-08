@@ -3,7 +3,7 @@ export class Appointment {
   location: string;
 
   constructor(when: Date, where: string) {
-    this.date = when;
+    this.date = new Date(when);
     this.location = where;
   }
 }

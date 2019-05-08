@@ -15,36 +15,36 @@ describe('AppointmentpageComponent', () => {
   let datePrimeArray: Date[];
   let dateSortedArray: Date[];
 
-  // reset test data before every test
-  beforeEach(() => {
-    allappointments = [] as Hero[];
-
-    crashTestHeroes = [
-      {
-        id: 0, name: 'alpha', skills: [], appointments: [
-          { location: 'Alexandria', date: new Date('1/1/01') },
-          { location: 'Birmingham', date: new Date('2/2/01') },
-          { location: 'Edmonds', date: new Date('5/5/05') },
-          { location: 'Galveston', date: new Date('8/1/12') }
-        ]
-      },
-      {
-        id: 23, name: 'zulu', skills: [], appointments: [
-          { location: 'Cambridge', date: new Date('3/3/01') },
-          { location: 'Dallas', date: new Date('4/4/01') },
-          { location: 'Fairfield', date: new Date('5/5/06') },
-          { location: 'Harriman', date: new Date('8/2/12') }
-        ]
-      }
-    ] as Hero[];
- 
-  })
-
-  // fake HeroService object to spy on 'getHeroes', similar to Dashboard
-  const heroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
-  heroService.getHeroes.and.returnValue(of(crashTestHeroes));
+  crashTestHeroes = [
+    {
+      id: 0, name: 'alpha', skills: [], appointments: [
+        { location: 'Alexandria', date: new Date('1/1/01') },
+        { location: 'Birmingham', date: new Date('2/2/01') },
+        { location: 'Edmonds', date: new Date('5/5/05') },
+        { location: 'Galveston', date: new Date('8/1/12') }
+      ]
+    },
+    {
+      id: 23, name: 'zulu', skills: [], appointments: [
+        { location: 'Cambridge', date: new Date('3/3/01') },
+        { location: 'Dallas', date: new Date('4/4/01') },
+        { location: 'Fairfield', date: new Date('5/5/06') },
+        { location: 'Harriman', date: new Date('8/1/12') }
+      ]
+    },
+    {
+      id: 4, name: 'epsilon', skills: [], appointments: []
+    },
+    {
+      id: 5, name: 'foxtrot', skills: []
+    }
+  ] as Hero[];
 
   beforeEach(async(() => {
+    // fake HeroService object to spy on 'getHeroes', similar to Dashboard
+    const heroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
+    heroService.getHeroes.and.returnValue(of(crashTestHeroes));
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -54,8 +54,7 @@ describe('AppointmentpageComponent', () => {
       providers: [
         { provide: HeroService, useValue: heroService }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -72,17 +71,18 @@ describe('AppointmentpageComponent', () => {
   // everything in allappointments should have a single appointment
   // iterate over allappointments, array length should be 1
   it('should only have one appointment per index in allappointments', () => {
-    allappointments.forEach(n => {
-      expect(n.appointments.length).toEqual(1);
-    });
+      expect(component.allappointments.length).toEqual(8);
+      component.allappointments.forEach(n => {
+        expect(n.appointments.length).toEqual(1);
+      });
   });
 
   // getheroes function should return crash test heroes  
   it('should verify getheroes was performed', async () => {
-    fixture.whenStable().then(() => {
-      expect(component.getHeroes).toEqual(crashTestHeroes);
+
+      expect(component.heroes).toEqual(crashTestHeroes);
       expect(getHeroesSpy.calls.any()).toBe(true);
-    })
+
   });
   
 

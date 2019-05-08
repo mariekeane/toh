@@ -46,7 +46,7 @@ describe('AppComponent', () => {
   });
 
   it('should create appointment class objects', () => {
-    expect(new Appointment(new Date(6 / 21 / 1788), 'Mexico')
+    expect(new Appointment(new Date('6/21/1788'), 'Mexico')
       ==
       {date: new Date(6/21/1788), location: 'Mexico'}
      )

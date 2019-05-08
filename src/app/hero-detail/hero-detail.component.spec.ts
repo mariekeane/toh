@@ -27,8 +27,8 @@ describe('HeroDetailComponent', () => {
   let nameInput: HTMLInputElement;
 
   beforeEach(async(() => {
-    originalHero = { id: 1, name: 'MyHero' } as Hero;
-    updatedHero = { id: 1, name: 'MyHeroUpdated' } as Hero;
+    originalHero = { id: 1, name: 'MyHero', skills: [], appointments: []} as Hero;
+    updatedHero = { id: 1, name: 'MyHeroUpdated', skills: [], appointments: [] } as Hero;
 
     // Create a fake HeroService object with `getHero()` and `updatehero()` spies
     const heroService = jasmine.createSpyObj('HeroService', ['getHero', 'updateHero']);
@@ -115,7 +115,36 @@ describe('HeroDetailComponent', () => {
     const saveButton = fixture.debugElement.query(By.css('#saveHero')).nativeElement;
     saveButton.dispatchEvent(new Event('click'));
     fixture.detectChanges();
-
     // expect(backSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('should add and remove appointments', () => {
+    // verify originalHero is blank
+    expect(originalHero.appointments.length).toEqual(0);
+    // change originalHero
+    component.addAppointment(new Date('11/6/1977'),'San Diego CA');
+    // verify originalHero is changed
+    expect(originalHero.appointments[0].location).toBe('San Diego CA');
+    // remove originalHero
+    component.removeAppointment(0);
+    // verify originalHero is changed
+    expect(originalHero.appointments.length).toEqual(0);
+  });
+
+
+  it('should add and remove skills', () => {
+    // verify originalHero is blank
+    expect(originalHero.skills.length).toEqual(0);
+    // change originalHero
+    component.addSkill('bo staff');
+    // verify originalHero is changed
+    expect(originalHero.skills[0]).toBe('bo staff');
+    // remove originalHero
+    component.removeSkill(0);
+    // verify originalHero is changed
+    expect(originalHero.skills.length).toEqual(0);
+  });
+
+
+
 });

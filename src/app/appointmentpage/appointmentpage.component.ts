@@ -42,7 +42,7 @@ export class AppointmentpageComponent implements OnInit {
       }
     });
     */
-    if (this.heroes) {
+    //if (this.heroes) {
       for (var a = 0; a < this.heroes.length; a++) {
         if (this.heroes[a].appointments) {
           for (var b = 0; b < this.heroes[a].appointments.length; b++) {
@@ -51,7 +51,7 @@ export class AppointmentpageComponent implements OnInit {
           }
         }
       }
-    };
+    //}
     // sort by date
     this.allappointments = this.allappointments.sort(
       (a: Hero, b: Hero) => {

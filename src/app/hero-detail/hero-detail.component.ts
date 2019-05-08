@@ -36,16 +36,16 @@ export class HeroDetailComponent implements OnInit {
     this.hero.skills.splice(position, 1);
   }
 
-  addSkill(): void {
-    this.hero.skills.push('');
+  addSkill(c: string = ''): void {
+    this.hero.skills.push(c);
   }
 
   removeAppointment(position: number): void {
     this.hero.appointments.splice(position, 1);
   }
 
-  addAppointment(): void {
-    this.hero.appointments.push(new Appointment(new Date,''));
+  addAppointment(a: Date, b: string): void {
+    this.hero.appointments.push(new Appointment(a,b));
  }
 
   goBack(): void {
