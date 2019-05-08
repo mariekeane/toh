@@ -7,11 +7,11 @@ export class HeroesPage {
   }
   
   async getTitleText(): Promise<string> {
-    return await element(by.css('#app-heroes-title')).getText();
+    return await (await element(by.css('#app-heroes-title'))).getText();
   }
   
   getHeroes(): ElementArrayFinder {
-    return element.all(by.css('.hero'));
+    return element.all(by.css('.hero a'));
   }
   
   async clickHero(index): Promise<void> {
@@ -27,7 +27,7 @@ export class HeroesPage {
   async getHeroNameText(index): Promise<string> {
     let heroListItems: ElementArrayFinder = this.getHeroes();
     let idText = await this.getHeroIdText(index);
-    let anchorText = await heroListItems.get(index).element(by.css('a')).getText();
+    let anchorText = await (await heroListItems.get(index)).getText();
     // E.g. extract "Mr. Nice" from "11 Mr. Nice"
     return anchorText.substr(idText.length + 1);
   } 

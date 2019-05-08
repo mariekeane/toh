@@ -1,7 +1,7 @@
 import express from 'express';
 
 var router = express.Router();
-var ctrlHero = require('../controllers/heroes');
+var ctrlHero = require('../controllers/api');
 
 router.get('/heroes', ctrlHero.getAllHeroes);
 router.get('/heroes/:id', ctrlHero.getHeroById);

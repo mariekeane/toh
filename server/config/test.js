@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = {
-    env: 'test',
-    db: 'mongodb://localhost/tohTest',
-    port: process.env.PORT || 4100
-};
+export const env = 'test';
+export const db = 'mongodb://localhost/tohTest';
+export const port = 3100;

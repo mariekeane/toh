@@ -14,7 +14,7 @@ describe('Heroes Page', () => {
   });
   
   it('should display all heroes', async () => {
-    expect(await heroPage.getHeroes().count()).toEqual(10);
+    expect(await heroPage.getHeroes().count()).toEqual(2);
   });
 
   afterEach(async () => {

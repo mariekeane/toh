@@ -2,9 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-//import * as mongoConfig from './config/config';
 import config from './config/index';
-import routes from './routes/index';
+import api from './routes/api';
+import path from 'path';
+import http from 'http';
 
 
 // Fixes for deprecation warnings
@@ -31,10 +32,28 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+// Point static path to dist
+app.use(express.static(path.join(__dirname, '../dist/angular-tour-of-heroes')));
 // Set up API routes
-app.use('/', routes);
+app.use('/api', api);
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/angular-tour-of-heroes/index.html'));
+});
+
+/**
+ * Get port from environment and store in Express.
+ */
+//const port = process.env.PORT || '3000';
+const port = config.port;
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+const server = http.createServer(app);
 
 // Listen on provided port, on all network interfaces.
-app.listen(config.port, () => console.log(`Express server running on ${config.port}`));
+app.listen(port, () => console.log(`Express server running on ${port}`));
 
 module.exports = app;

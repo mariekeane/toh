@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build && babel-watch server/server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "babel-watch server/server.js",
-    "server_test": "cross-env NODE_ENV=test mocha --require @babel/register"
+    "dev_server": "babel-watch server/server.js",
+    "test_server": "cross-env NODE_ENV=test babel-watch server/server.js",
+    "api_test": "cross-env NODE_ENV=test mocha --require @babel/register"
   },
   "private": true,
   "dependencies": {

@@ -1,9 +1,9 @@
 import { browser, by, element, promise, ElementFinder, ElementArrayFinder } from 'protractor';
 
 export class HeroDetailsPage {
-  private id;
+  private id: string;
 
-  constructor(id=0) {
+  constructor(id="") {
     this.id = id;      
   }
   

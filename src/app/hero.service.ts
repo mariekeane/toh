@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 import { Hero } from './hero';
 
@@ -15,7 +16,7 @@ const httpOptions = {
 })
 export class HeroService {
 
-  readonly heroesUrl = 'http://localhost:4000/heroes';  // URL to web api
+  readonly heroesUrl = `${environment.serverUrl}/api/heroes`;  // URL to hero api
 
   constructor(private http: HttpClient,
               private messageService: MessageService) { }

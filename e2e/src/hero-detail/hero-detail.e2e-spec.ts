@@ -16,6 +16,7 @@ describe('Hero Details Page', () => {
     heroPage = new HeroesPage();
     await heroPage.navigateTo();
     await heroPage.clickHero(0);
+    await browser.wait(ExpectedConditions.urlContains("/detail"), 5000);
   });
 
   it('should display proper title', async () => {
@@ -42,7 +43,7 @@ describe('Hero Details Page', () => {
       await heroDetailsPage.clickSaveButton();
       await browser.wait(ExpectedConditions.urlContains("/heroes"), 5000);
       
-      expect(parseInt(await heroPage.getHeroIdText(0))).toEqual(11);
+      expect(await heroPage.getHeroIdText(0)).toEqual('abc');
       expect(await heroPage.getHeroNameText(0)).toEqual('Cool Dude');
     });
     
@@ -56,7 +57,7 @@ describe('Hero Details Page', () => {
       await heroDetailsPage.clickCancelButton();
       await browser.wait(ExpectedConditions.urlContains("/heroes"), 5000);
       
-      expect(parseInt(await heroPage.getHeroIdText(0))).toEqual(11);
+      expect(await heroPage.getHeroIdText(0)).toEqual('abc');
       expect(await heroPage.getHeroNameText(0)).toEqual('Mr. Nice');
     });
   
