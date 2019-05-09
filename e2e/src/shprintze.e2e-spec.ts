@@ -1,17 +1,16 @@
-import { AppPage } from './app.po';
+import { DashboardPage } from './pageObjects/dashboard.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
-  let page: AppPage;
+// Test Goal: asdf
+
+describe('Test Shprintze', () => {
+  let page: DashboardPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new DashboardPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to angular-tour-of-heroes!');
-  });
+  // Tests Go Here
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
@@ -20,4 +19,5 @@ describe('workspace-project App', () => {
       level: logging.Level.SEVERE,
     } as logging.Entry));
   });
-});
+
+}); // end of Description
