@@ -12,9 +12,9 @@
   <h4>Skill Search</h4>
   <input #skillSearchBox id="skill-search-box" (input)="skillSearch(skillSearchBox.value)" placeholder="Skill" />
   <ul class="search-results">
-    <li class="skill-search-result" *ngFor="let skill of skills$ | async" >
+    <li class="skill-search-result" *ngFor="let hero of skills$ | async" >
       <a routerLink="/detail/{{hero.id}}">
-        {{skill.name}}
+        {{hero.name}}
       </a>
     <!--</li>-->
 </ul>
