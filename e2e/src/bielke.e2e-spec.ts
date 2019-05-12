@@ -10,27 +10,26 @@ describe('Test Bielke', () => {
     page = new DashboardPage();
   });
 
-  it('should display title text', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Tour of Heroes');
+  it('should display title text', async () => {
+    await page.navigateTo();
+    expect(await page.getTitleText()).toEqual('Tour of Heroes');
   });
 
-  /* BROKEN , 0 notEqual 4, cannot find by css selector clearButton
-
-  it('should have four hero names displayed', () => {
-    expect(page.getTopHeroes().count()).toEqual(4);
+  // BROKEN , 0 notEqual 4, cannot find by css selector clearButton
+  it('should have four hero names displayed', async () => {
+    expect(await page.getTopHeroes().count()).toEqual(4);
   });
 
   it('should have a functional clear Messages button', async () => {
-    page.navigateTo();
+    await page.navigateTo();
     // should not be empty on loading, make sure of that
-    expect(page.getMessageContent()).toEqual('HeroService: fetched heroes');
+    expect(await page.getMessageContent(0)).toEqual('HeroService: fetched heroes');
     // get the clear button and click it
     await page.clickMessageClearButton();
     // make sure its empty
-    expect(page.getMessageContent()).toBe(null);
+    expect(await page.getMessages().count()).toEqual(0);
   });
-  */
+  
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser

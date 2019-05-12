@@ -23,9 +23,10 @@ export class HeroDetailComponent implements OnInit {
   }
   
   getHero(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);
+    this.route.params.subscribe(params => {
+      this.heroService.getHero(params.id)
+        .subscribe(hero => this.hero = hero);
+    });
   }
 
   trackByIndex(index: number, obj: any): any {

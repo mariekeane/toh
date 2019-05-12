@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class HeroService {
 
-  readonly heroesUrl = 'api/heroes';  // URL to web api
+  readonly heroesUrl = 'http://localhost:4000/heroes';  // URL to web api
 
   constructor(private http: HttpClient,
               private messageService: MessageService) { }

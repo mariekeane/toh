@@ -14,7 +14,7 @@ export class DashboardPage {
   }
 
   getTopHeroes(): ElementArrayFinder {
-    return element.all(by.css('heroName'));
+    return element.all(by.css('.heroName'));
   }
 
   getHeroSearchInput(): ElementFinder {
@@ -25,12 +25,17 @@ export class DashboardPage {
     return element(by.id('skill-search-box'));
   }
 
-  async getMessageContent() {
-    return await element(by.css('messagesHere')).getText();
+  getMessages(): ElementArrayFinder {
+    return element.all(by.css('.messagesHere'));
   }
 
+  async getMessageContent(index: number): Promise<string> {
+    return await this.getMessages().get(index).getText();
+  }
+
+
   getMessageClearButton(): ElementFinder {
-    return element(by.css('clearButton'));
+    return element(by.css('.clearButton'));
   }
 
   async clickMessageClearButton(): Promise<void> {
