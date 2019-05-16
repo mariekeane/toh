@@ -27,8 +27,8 @@ describe('HeroDetailComponent', () => {
   let nameInput: HTMLInputElement;
 
   beforeEach(async(() => {
-    originalHero = { id: 1, name: 'MyHero', skills: [], appointments: []} as Hero;
-    updatedHero = { id: 1, name: 'MyHeroUpdated', skills: [], appointments: [] } as Hero;
+    originalHero = { _id: '1', name: 'MyHero', skills: [], appointments: []} as Hero;
+    updatedHero = { _id: '1', name: 'MyHeroUpdated', skills: [], appointments: [] } as Hero;
 
     // Create a fake HeroService object with `getHero()` and `updatehero()` spies
     const heroService = jasmine.createSpyObj('HeroService', ['getHero', 'updateHero']);

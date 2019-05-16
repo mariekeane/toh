@@ -39,10 +39,11 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Tour of Heroes');
   });
 
+  
   it('should create hero class objects', () => {
-    expect(new Hero(127, 'Goofy', ['silliness']) 
+    expect(new Hero('127', 'Goofy', ['silliness']) 
     ==
-    {name: 'Goofy', id: 127, skills: ['silliness'], appointments: []})
+    {name: 'Goofy', _id: '127', skills: ['silliness'], appointments: []})
   });
 
   it('should create appointment class objects', () => {
@@ -51,5 +52,6 @@ describe('AppComponent', () => {
       {date: new Date(6/21/1788), location: 'Mexico'}
      )
   });
+  
 
 });

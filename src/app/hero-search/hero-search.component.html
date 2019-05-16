@@ -3,7 +3,7 @@
   <input #nameSearchBox id="search-box" (input)="nameSearch(nameSearchBox.value)" placeholder="Hero Name" />
   <ul class="search-results">
     <li class="hero-search-result" *ngFor="let hero of heroes$ | async">
-      <a routerLink="/detail/{{hero.id}}">
+      <a routerLink="/detail/{{hero._id}}">
         {{hero.name}}
       </a>
     <!--</li>-->
@@ -13,7 +13,7 @@
   <input #skillSearchBox id="skill-search-box" (input)="skillSearch(skillSearchBox.value)" placeholder="Skill" />
   <ul class="search-results">
     <li class="skill-search-result" *ngFor="let hero of skills$ | async" >
-      <a routerLink="/detail/{{hero.id}}">
+      <a routerLink="/detail/{{hero._id}}">
         {{hero.name}}
       </a>
     <!--</li>-->

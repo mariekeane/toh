@@ -4,7 +4,7 @@ import { AppointmentpageComponent } from './appointmentpage.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { of } from 'rxjs'
+import { of } from 'rxjs';
 
 describe('AppointmentpageComponent', () => {
   let component: AppointmentpageComponent;
@@ -17,7 +17,7 @@ describe('AppointmentpageComponent', () => {
 
   crashTestHeroes = [
     {
-      id: 0, name: 'alpha', skills: [], appointments: [
+      _id: '0', name: 'alpha', skills: [], appointments: [
         { location: 'Alexandria', date: new Date('1/1/01') },
         { location: 'Birmingham', date: new Date('2/2/01') },
         { location: 'Edmonds', date: new Date('5/5/05') },
@@ -25,7 +25,7 @@ describe('AppointmentpageComponent', () => {
       ]
     },
     {
-      id: 23, name: 'zulu', skills: [], appointments: [
+      _id: '23', name: 'zulu', skills: [], appointments: [
         { location: 'Cambridge', date: new Date('3/3/01') },
         { location: 'Dallas', date: new Date('4/4/01') },
         { location: 'Fairfield', date: new Date('5/5/06') },
@@ -33,10 +33,10 @@ describe('AppointmentpageComponent', () => {
       ]
     },
     {
-      id: 4, name: 'epsilon', skills: [], appointments: []
+      _id: '4', name: 'epsilon', skills: [], appointments: []
     },
     {
-      id: 5, name: 'foxtrot', skills: []
+      _id: '5', name: 'foxtrot', skills: []
     }
   ] as Hero[];
 

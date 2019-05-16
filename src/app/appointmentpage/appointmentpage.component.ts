@@ -46,7 +46,7 @@ export class AppointmentpageComponent implements OnInit {
       for (var a = 0; a < this.heroes.length; a++) {
         if (this.heroes[a].appointments) {
           for (var b = 0; b < this.heroes[a].appointments.length; b++) {
-            this.allappointments.push(new Hero(this.heroes[a].id, this.heroes[a].name, this.heroes[a].skills,
+            this.allappointments.push(new Hero(this.heroes[a]._id, this.heroes[a].name, this.heroes[a].skills,
               [this.heroes[a].appointments[b]]));          
           }
         }

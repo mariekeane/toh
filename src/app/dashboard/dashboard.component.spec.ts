@@ -17,8 +17,8 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
 
     expectedHeroes = [
-      { id: 1, name: 'A', skills: [], appointments: [] },
-      { id: 2, name: 'B', skills: [], appointments: [] }
+      { _id: '1', name: 'A', skills: [], appointments: [] },
+      { _id: '2', name: 'B', skills: [], appointments: [] }
     ] as Hero[];
 
     // Create a fake HeroService object with a `getHeroes()` spy

@@ -1,10 +1,13 @@
 /* HeroesComponent's private CSS styles */
 .heroes {
-  margin: 0 0 2em 0;
+  margin: 0 0 0 0;
   list-style-type: none;
   padding: 0;
   width: 15em;
 }
+
+
+
 .heroes li {
   position: relative;
   cursor: pointer;
@@ -15,10 +18,14 @@
   border-radius: 4px;
 }
 
+
+
 .heroes li:hover {
   color: #607D8B;
   background-color: #DDD;
+  /*
   left: .1em;
+  */
 }
 
 .heroes a {
@@ -33,6 +40,9 @@
   color:#607D8B;
 }
 
+
+
+
 .heroes .badge {
   display: inline-block;
   font-size: small;
@@ -41,6 +51,7 @@
   background-color: #607D8B;
   line-height: 1em;
   position: relative;
+  top: -4px;
   left: -1px;
   top: -4px;
   height: 1.8em;
@@ -67,7 +78,9 @@ button:hover {
 button.delete {
   position: relative;
   left: 194px;
-  top: -32px;
+  
+  top: -18px;
+  
   background-color: gray !important;
   color: white;
 }

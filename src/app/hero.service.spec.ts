@@ -36,9 +36,9 @@ describe('HeroesService', () => {
     beforeEach(() => {
       heroservice = TestBed.get(HeroService);
       expectedHeroes = [
-        { id: 1, name: 'Forbush Man', skills: ['surviving rejection'], appointments: [{ date: new Date(1 / 1 / 2020), location: 'blah' }, { date: new Date(2 / 2 / 2020), location: 'blah' }] },
-        { id: 2, name: 'Beeblebrox', skills: ['fashion sense', 'second head'], appointments: [{ date: new Date(3 / 3 / 2020), location: 'blah' }, { date: new Date(4 / 4 / 2019), location: 'blah' }] },
-        { id: 3, name: 'Ted', skills: [], appointments: [] }
+        { _id: '1', name: 'Forbush Man', skills: ['surviving rejection'], appointments: [{ date: new Date(1 / 1 / 2020), location: 'blah' }, { date: new Date(2 / 2 / 2020), location: 'blah' }] },
+        { _id: '2', name: 'Beeblebrox', skills: ['fashion sense', 'second head'], appointments: [{ date: new Date(3 / 3 / 2020), location: 'blah' }, { date: new Date(4 / 4 / 2019), location: 'blah' }] },
+        { _id: '3', name: 'Ted', skills: [], appointments: [] }
       ] as Hero[];
     });
 
@@ -98,7 +98,7 @@ describe('HeroesService', () => {
 
       // respond to each request with different mock hero results
       requests[0].flush([]);
-      requests[1].flush([{ id: 1, name: 'Bobo the clown' }]);
+      requests[1].flush([{ _id: 1, name: 'Bobo the clown' }]);
       requests[2].flush(expectedHeroes);
     });
 
@@ -108,15 +108,15 @@ describe('HeroesService', () => {
 
   describe('#getHero', () => {
     let expectedHero: Hero;
-    const makeUrl = (id: number) => `${heroservice.heroesUrl}/${id}`;
+    const makeUrl = (_id: number) => `${heroservice.heroesUrl}/${_id}`;
 
     beforeEach(() => {
       heroservice = TestBed.get(HeroService);
-      expectedHero = { id: 1, name: 'A' } as Hero;
+      expectedHero = { _id: '1', name: 'A' } as Hero;
     });
 
     it('should return expected hero (called once)', () => {
-      heroservice.getHero(1).subscribe(
+      heroservice.getHero('1').subscribe(
         hero => expect(hero).toEqual(expectedHero, 'should return expected hero'),
         fail
       );
@@ -140,10 +140,10 @@ describe('HeroesService', () => {
       heroservice = TestBed.get(HeroService);
 
       expectedHeroes = [
-        { id: 1, name: 'Aaa' }  ,
-        { id: 2, name: 'Aaab' } ,
-        { id: 3, name: 'Baaab' },
-        { id: 4, name: 'Baaa' } ,
+        { _id: '1', name: 'Aaa' }  ,
+        { _id: '2', name: 'Aaab' } ,
+        { _id: '3', name: 'Baaab' },
+        { _id: '4', name: 'Baaa' } ,
       ] as Hero[];
     });
 
@@ -173,11 +173,11 @@ describe('HeroesService', () => {
 
   describe('#updateHero', () => {
     // Expecting the query form of URL so should not 404 when id not found
-    const makeUrl = (id: number) => `${heroservice.heroesUrl}/${id}`;
+    const makeUrl = (_id: number) => `${heroservice.heroesUrl}/${_id}`;
 
     it('should update a hero and return it', () => {
 
-      const updateHero: Hero = { id: 1, name: 'A', skills: [], appointments: [] };
+      const updateHero: Hero = { _id: '1', name: 'A', skills: [], appointments: [] };
 
       heroservice.updateHero(updateHero).subscribe(
         data => expect(data).toEqual(updateHero, 'should return the hero'),
@@ -198,7 +198,7 @@ describe('HeroesService', () => {
     //? 
     it('should turn 404 error into user-facing error', () => {
       const msg = 'Deliberate 404';
-      const updateHero: Hero = { id: 1, name: 'A', skills: [], appointments: [] };
+      const updateHero: Hero = { _id: '1', name: 'A', skills: [], appointments: [] };
       heroservice.updateHero(updateHero).subscribe(
         heroes => fail('expected to fail'),
         error => expect(error.message).toContain(msg)
@@ -213,7 +213,7 @@ describe('HeroesService', () => {
     it('should turn network error into user-facing error', () => {
       const emsg = 'simulated network error';
 
-      const updateHero: Hero = { id: 1, name: 'A', skills: [], appointments: [] };
+      const updateHero: Hero = { _id: '1', name: 'A', skills: [], appointments: [] };
       heroservice.updateHero(updateHero).subscribe(
         heroes => fail('expected to fail'),
         error => expect(error.message).toContain(emsg)
@@ -229,11 +229,11 @@ describe('HeroesService', () => {
 
   describe('#deleteHero', () => {
     // Expecting the query form of URL so should not 404 when id not found
-    const makeUrl = (id: number) => `${heroservice.heroesUrl}/${id}`;
+    const makeUrl = (_id: number) => `${heroservice.heroesUrl}/${_id}`;
 
     it('should delete a hero', () => {
 
-      const deleteHero: Hero = { id: 1, name: 'A', skills: [], appointments: [] };
+      const deleteHero: Hero = { _id: '1', name: 'A', skills: [], appointments: [] };
 
       heroservice.deleteHero(deleteHero).subscribe(
         data => expect(data).toEqual(deleteHero, 'should return the deleted hero'),
@@ -259,7 +259,7 @@ describe('HeroesService', () => {
 
     it('should add a hero', () => {
 
-      let addHero: Hero = { id: 1, name: 'A', skills: [], appointments: [] };
+      let addHero: Hero = { _id: '1', name: 'A', skills: [], appointments: [] };
 
       heroservice.addHero(addHero).subscribe(
         data => expect(data).toEqual(addHero, 'should return the added hero'),
