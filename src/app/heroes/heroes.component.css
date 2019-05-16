@@ -6,8 +6,6 @@
   width: 15em;
 }
 
-
-
 .heroes li {
   position: relative;
   cursor: pointer;
@@ -16,9 +14,8 @@
   padding: .3em 0;
   height: 1.6em;
   border-radius: 4px;
+  width: 360px;
 }
-
-
 
 .heroes li:hover {
   color: #607D8B;
@@ -33,15 +30,12 @@
   text-decoration: none;
   position: relative;
   display: block;
-  width: 250px;
+  width: 360px; 
 }
 
 .heroes a:hover {
   color:#607D8B;
 }
-
-
-
 
 .heroes .badge {
   display: inline-block;
@@ -55,7 +49,7 @@
   left: -1px;
   top: -4px;
   height: 1.8em;
-  min-width: 16px;
+  width: 120px; 
   text-align: right;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
@@ -77,10 +71,9 @@ button:hover {
 
 button.delete {
   position: relative;
-  left: 194px;
-  
-  top: -18px;
-  
+  left: 364px;
+  top: -34px;
   background-color: gray !important;
   color: white;
 }
+

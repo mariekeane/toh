@@ -14,10 +14,10 @@
 <ul class="heroes">
   <li *ngFor="let hero of heroes" class="hero">
     <a routerLink="/detail/{{hero._id}}">
-      <span class="badge">{{hero._id}}</span> {{hero.name}}
+      <span class="badge">{{hero.name}}</span>
+      <span class="longidnumber">{{hero._id}}</span>
     </a>
-    <button class="delete" title="delete hero"
-            (click)="delete(hero)">
+    <button class="delete" title="delete hero" (click)="delete(hero)">
       x
     </button>
   </li>
