@@ -8,6 +8,5 @@ router.get('/heroes/:id', ctrlHero.getHeroById);
 router.post('/heroes', ctrlHero.addHero);
 router.put('/heroes/:id', ctrlHero.updateHero);
 router.delete('/heroes/:id', ctrlHero.deleteHero);
-router.post('/heroes/seed', ctrlHero.seedHeroes);
 
 export default router;

@@ -56,11 +56,3 @@ export function deleteHero(req, res) {
             res.json('Removed successfully');
     });
 }
-
-export function seedHeroes(req, res) {
-    seedHeroCollection().then(_ => {
-        res.json('Done seeding heroes');
-    }).catch(err => {
-        res.json(err);
-    })
-}

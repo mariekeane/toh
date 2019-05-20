@@ -1,3 +1,20 @@
+## Development
+Start Backend: `npm run dev_server`
+Start Frontend: `ng serve`
+Build Frontend and run from backend: `npm run start`
+
+## Testing
+Start Backend: `npm run test_server`
+Start Frontend: `ng serve -c test`
+Frontend Unit Tests: `ng test`
+End-to-End Tests: `ng e2e`
+API Tests: `npm run api_test`
+
+See `package.json` for more details.
+
+
+
+
 # AngularTourOfHeroes
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
