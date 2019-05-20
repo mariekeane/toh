@@ -7,18 +7,18 @@ export function getAllHeroes(req, res) {
         else
             res.json(heroes);
     });
-  }
+}
   
-  export function getHeroById(req, res) {
+export function getHeroById(req, res) {
     Hero.findById(req.params.id, (err, hero) => {
         if (err)
             console.log(err);
         else
             res.json(hero);
     })
-  }
+}
   
-  export function addHero(req, res) {
+export function addHero(req, res) {
     let hero = new Hero(req.body);
     hero.save()
         .then(hero => {
@@ -27,9 +27,9 @@ export function getAllHeroes(req, res) {
         .catch(err => {
             res.status(400).send('Failed to create new record');
         });
-  }
+}
 
-  export function updateHero(req, res) {
+export function updateHero(req, res) {
     Hero.findById(req.params.id, (err, hero) => {
         if (!hero)
             return next(new Error('Could not load Document'));
@@ -45,13 +45,13 @@ export function getAllHeroes(req, res) {
             });
         }
     });
-  }
+}
   
-  export function deleteHero(req, res) {
+export function deleteHero(req, res) {
     Hero.findByIdAndRemove({_id: req.params.id}, (err, hero) => {
         if (err)
             res.json(err);
         else
             res.json('Removed successfully');
     });
-  }
+}

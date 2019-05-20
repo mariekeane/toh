@@ -6,6 +6,7 @@ import config from './config/index';
 import api from './routes/api';
 import path from 'path';
 import http from 'http';
+import { seedHeroes } from './controllers/seed';
 
 
 // Fixes for deprecation warnings
@@ -20,11 +21,18 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 // Mongo Connection
-mongoose.connect(config.db);
+mongoose.connect(`${config.protocol}://${config.host}/${config.heroes}`);
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('MongoDB database connection established successfully!');
 });
+
+if (config.env == 'test') {
+    /*mongoose.connection.db.dropCollection('heroes', function(err, result) {
+        console.log('done dropping heroes collection');
+    });*/
+    seedHeroes();
+}
 
 const app = express();
 

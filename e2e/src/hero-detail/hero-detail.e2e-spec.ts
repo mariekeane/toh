@@ -20,7 +20,7 @@ describe('Hero Details Page', () => {
   });
 
   it('should display proper title', async () => {
-    expect(await heroDetailsPage.getTitleText()).toEqual('MR. NICE Details');
+    expect(await heroDetailsPage.getTitleText()).toEqual('TEST HERO 1 Details');
   });
   
   describe('Update Hero', () => {
@@ -33,20 +33,6 @@ describe('Hero Details Page', () => {
       expect(await heroDetailsPage.getTitleText()).toEqual('COOL DUDE Details');
     });
     
-    it('should navigate to heroes page on save', async () => {
-      await heroDetailsPage.clickSaveButton();
-      //await browser.wait(ExpectedConditions.urlIs(browser.baseUrl + "/heroes"), 5000);
-      expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + "/heroes");
-    });
-    
-    it('heroes page should contain updated hero', async () => {
-      await heroDetailsPage.clickSaveButton();
-      await browser.wait(ExpectedConditions.urlContains("/heroes"), 5000);
-      
-      expect(await heroPage.getHeroIdText(0)).toEqual('abc');
-      expect(await heroPage.getHeroNameText(0)).toEqual('Cool Dude');
-    });
-    
     it('should navigate to heroes page on cancel', async () => {
       await heroDetailsPage.clickCancelButton();
       //await browser.wait(ExpectedConditions.urlIs(browser.baseUrl + "/heroes"), 5000);
@@ -57,8 +43,22 @@ describe('Hero Details Page', () => {
       await heroDetailsPage.clickCancelButton();
       await browser.wait(ExpectedConditions.urlContains("/heroes"), 5000);
       
-      expect(await heroPage.getHeroIdText(0)).toEqual('abc');
-      expect(await heroPage.getHeroNameText(0)).toEqual('Mr. Nice');
+      //expect(await heroPage.getHeroIdText(0)).toEqual('5ce2e87638c2943fdcea294b');
+      expect(await heroPage.getHeroNameText(0)).toEqual('Test Hero 1');
+    });
+
+    it('should navigate to heroes page on save', async () => {
+      await heroDetailsPage.clickSaveButton();
+      //await browser.wait(ExpectedConditions.urlIs(browser.baseUrl + "/heroes"), 5000);
+      expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + "/heroes");
+    });
+    
+    it('heroes page should contain updated hero', async () => {
+      await heroDetailsPage.clickSaveButton();
+      await browser.wait(ExpectedConditions.urlContains("/heroes"), 5000);
+      
+      //expect(await heroPage.getHeroIdText(0)).toEqual('5ce2e87638c2943fdcea294b');
+      expect(await heroPage.getHeroNameText(0)).toEqual('Cool Dude');
     });
   
   });
