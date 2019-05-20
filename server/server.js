@@ -6,17 +6,10 @@ import config from './config/index';
 import api from './routes/api';
 import path from 'path';
 import http from 'http';
-import { seedHeroes } from './controllers/seed';
+import { seedHeroCollection } from './controllers/seed';
 
 
 // Fixes for deprecation warnings
-/* 
-    Replace update() with updateOne(), updateMany(), or replaceOne()
-    Replace remove() with deleteOne() or deleteMany().
-    Replace count() with countDocuments(), unless you want to count how 
-        many documents are in the whole collection (no filter). In the latter 
-        case, use estimatedDocumentCount().
- */
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
@@ -28,10 +21,11 @@ connection.once('open', () => {
 });
 
 if (config.env == 'test') {
-    /*mongoose.connection.db.dropCollection('heroes', function(err, result) {
-        console.log('done dropping heroes collection');
-    });*/
-    seedHeroes();
+    seedHeroCollection().then(_ => {
+        console.log('Done Seeding Data!');
+    }).catch(err => {
+        console.log('Error Seeding Data!');
+    });
 }
 
 const app = express();

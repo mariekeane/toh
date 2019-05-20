@@ -1,4 +1,5 @@
 import Hero from '../models/Hero';
+import { seedHeroCollection } from '../controllers/seed';
 
 export function getAllHeroes(req, res) {
     Hero.find((err, heroes) => {
@@ -54,4 +55,12 @@ export function deleteHero(req, res) {
         else
             res.json('Removed successfully');
     });
+}
+
+export function seedHeroes(req, res) {
+    seedHeroCollection().then(_ => {
+        res.json('Done seeding heroes');
+    }).catch(err => {
+        res.json(err);
+    })
 }
