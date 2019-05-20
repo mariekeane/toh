@@ -1,14 +1,14 @@
 ## Development
-Start Backend: `npm run dev_server`
-Start Frontend: `ng serve`
+Start Backend: `npm run dev_server`<br>
+Start Frontend: `ng serve`<br>
 Build Frontend and run from backend: `npm run start`
 
 ## Testing
-Start Backend: `npm run test_server`
-Start Frontend: `ng serve -c test`
-Frontend Unit Tests: `ng test`
-End-to-End Tests: `ng e2e`
-API Tests: `npm run api_test`
+Start Backend: `npm run test_server`<br>
+Start Frontend: `ng serve -c test`<br>
+Frontend Unit Tests: `ng test`<br>
+End-to-End Tests: `ng e2e`<br>
+API Tests: `npm run api_test`<br>
 
 See `package.json` for more details.
 
