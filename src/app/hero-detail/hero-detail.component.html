@@ -2,11 +2,41 @@
   <h2>{{hero.name | uppercase}} Details</h2>
   <div><span>id: </span>{{hero.id}}</div>
   <div>
-    <label>name:
-      <input [(ngModel)]="hero.name" placeholder="name"/>
+    <label>
+      name:
+      <input [(ngModel)]="hero.name" placeholder="name" />
     </label>
   </div>
+
+<!-- Code to two-way bind object array values -->
+
+  <!--Skills -->
+  <h2>Skills</h2>
+    <div class="skill" *ngFor="let skill of hero.skills; let idx = index; trackBy:trackByIndex;">
+      <input [(ngModel)]="hero.skills[idx]" [name]="skill" placeholder="skill" required />
+      <button class="delete" title="delete skill" (click)="removeSkill(idx)">
+        x
+      </button>
+    </div>
+  <div>
+    <button (click)="addSkill()">add skill</button>
+  </div>
+
+  <!-- Appointments -->
+  <h2>Appointments</h2>
+  <div class="skill" *ngFor="let appointment of hero.appointments; let idx = index; trackBy:trackByIndex;">
+    <input [(ngModel)]="hero.appointments[idx].date" [name]="skill" placeholder="date" required />
+    <input [(ngModel)]="hero.appointments[idx].location" [name]="skill" placeholder="location" required />
+    <button class="delete" title="delete appointment" (click)="removeAppointment(idx)">
+      x
+    </button>
+  </div>
+  <div>
+    <button (click)="addAppointment()">add appointment</button>
+  </div>
 </div>
-<button (click)="save()">save</button>
-<button (click)="goBack()">go back</button>
+
+<!-- Page Controls -->
+<button (click)="save()" id="saveHero">save</button>
+<button (click)="goBack()" id="goBack">go back</button>
 

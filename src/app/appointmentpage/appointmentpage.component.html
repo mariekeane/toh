@@ -1,0 +1,16 @@
+<h2>Appointments</h2>
+
+
+<ul class="appointmentpage">
+  <li *ngFor="let hero of allappointments">
+    <a routerLink="/detail/{{hero._id}}">
+      <span class="when">{{hero.appointments[0].date}}</span>
+
+    </a>
+      <span class="who">{{hero.name}}</span>
+      <span class="where">{{hero.appointments[0].location}}</span>
+
+
+  </li>
+</ul>
+
